@@ -8,19 +8,20 @@ import com.google.zxing.common.BitMatrix;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Map;
 
 public class CodeGenerator {
     // Function to create the QR code
     public static void createQR(String data, String path,
-                                String charset, Map hashMap,
+                                String charset, Map hints,
                                 int height, int width)
             throws WriterException, IOException
     {
 
         BitMatrix matrix = new MultiFormatWriter().encode(
                 new String(data.getBytes(charset), charset),
-                BarcodeFormat.QR_CODE, width, height);
+                BarcodeFormat.QR_CODE, width, height, hints);
 
         MatrixToImageWriter.writeToFile(
                 matrix,
